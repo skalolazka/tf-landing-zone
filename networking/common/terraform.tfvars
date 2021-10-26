@@ -14,12 +14,24 @@
 
 billing_account_id = "01894F-FA7D6D-2F89BF"
 
-environments = ["dev", "stage", "prod"]
+owners_host = ["user:nstrelkova@google.com"]
+owners_svc = ["user:nstrelkova@google.com"]
 
-iam_audit_viewers = ["user:nstrelkova@google.com"]
-iam_shared_owners = ["user:nstrelkova@google.com"]
-iam_terraform_owners = ["user:nstrelkova@google.com"]
-
-organization_id = "102420064371"
 prefix = "vb3"
-root_node = "folders/731950865872"
+# Attention: ideally prefix should be with the env name,
+# since projects have to have different names in different envs
+env_name = "dev"
+
+project_create = {
+    oslogin         = false
+    parent          = "folders/731950865872" # root node, vb-fabric-3
+}
+
+ip_ranges = {
+    hub     = "10.0.0.0/24"
+    spoke   = "10.1.0.0/24"
+}
+
+# here specify the env folder
+root_node = "folders/1029609482939" # dev in vb-fabric-3
+svc_project_name = "sanipa" # project to host the app

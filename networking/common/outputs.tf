@@ -12,14 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-billing_account_id = "01894F-FA7D6D-2F89BF"
+output "projects" {
+  description = "Project ids."
+  value = {
+    hub         = module.hub_project.project_id
+    host        = module.spoke_project.project_id
+    svc         = module.svc_project.project_id
+  }
+}
 
-environments = ["dev", "stage", "prod"]
+output "vms" {
+  description = "Service VMs."
+  value = {
+    for instance in local.vm-instances :
+    instance.name => instance.network_interface.0.network_ip
+  }
+}
 
-iam_audit_viewers = ["user:nstrelkova@google.com"]
-iam_shared_owners = ["user:nstrelkova@google.com"]
-iam_terraform_owners = ["user:nstrelkova@google.com"]
-
-organization_id = "102420064371"
-prefix = "vb3"
-root_node = "folders/731950865872"
+output "vpc" {
+  description = "Shared VPC."
+  value = {
+    name    = module.vpc-shared.name
+    subnets = module.vpc-shared.subnet_ips
+  }
+}
