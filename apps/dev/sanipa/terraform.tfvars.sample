@@ -1,0 +1,5 @@
+prefix = ""
+
+env_name = "dev"
+
+app_name = "sanipa"

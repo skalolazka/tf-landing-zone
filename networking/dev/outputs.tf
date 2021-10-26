@@ -12,9 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#output "projects" {
+#  description = "Project ids."
+#  value = {
+#    hub         = module.hub_project.project_id
+#    host        = module.spoke_project.project_id
+#    svc         = module.svc_project.project_id
+#  }
+#}
 
-terraform {
-  backend "gcs" {
-    bucket = ""
-  }
-}
+#output "vms" {
+#  description = "Service VMs."
+#  value = {
+#    for instance in local.vm-instances :
+#    instance.name => instance.network_interface.0.network_ip
+#  }
+#}
+
+#output "vpc" {
+#  description = "Shared VPC."
+#  value = {
+#    name    = module.vpc-shared.name
+#    subnets = module.vpc-shared.subnet_ips
+#  }
+#}

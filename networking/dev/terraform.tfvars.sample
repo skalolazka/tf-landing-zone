@@ -12,26 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-billing_account_id = "01894F-FA7D6D-2F89BF"
+billing_account_id = ""
 
-owners_host = ["user:nstrelkova@google.com"]
-owners_svc = ["user:nstrelkova@google.com"]
+owners = [""]
 
-prefix = "vb3"
+prefix = ""
 # Attention: ideally prefix should be with the env name,
 # since projects have to have different names in different envs
 env_name = "dev"
 
-project_create = {
-    oslogin         = false
-    parent          = "folders/731950865872" # root node, vb-fabric-3
-}
-
-ip_ranges = {
-    hub     = "10.0.0.0/24"
-    spoke   = "10.1.0.0/24"
-}
-
 # here specify the env folder
-root_node = "folders/1029609482939" # dev in vb-fabric-3
-svc_project_name = "sanipa" # project to host the app
+root_node = "" # dev folder
+
+app_projects = ["sanipa"] # projects to host the app

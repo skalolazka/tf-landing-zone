@@ -17,22 +17,8 @@ variable "billing_account_id" {
   type        = string
 }
 
-variable "ip_ranges" {
-  description = "Subnet IP CIDR ranges."
-  type        = map(string)
-  default = {
-    svc = "10.0.16.0/24"
-  }
-}
-
-variable "owners_svc" {
-  description = "Service project owners, in IAM format."
-  type        = list(string)
-  default     = []
-}
-
-variable "owners_host" {
-  description = "Host project owners, in IAM format."
+variable "owners" {
+  description = "Project owners, in IAM format."
   type        = list(string)
   default     = []
 }
@@ -42,26 +28,13 @@ variable "prefix" {
   type        = string
 }
 
-variable "svc_project_name" {
-  description = "Project name for the service project (without the prefix)"
-  type        = string
-}
-
-
-variable "private_service_ranges" {
-  description = "Private service IP CIDR ranges."
-  type        = map(string)
-  default = {
-    cluster-1 = "192.168.0.0/28"
-  }
-}
-
 variable "project_services" {
   description = "Service APIs enabled by default in new projects."
   type        = list(string)
   default = [
     "container.googleapis.com",
     "stackdriver.googleapis.com",
+    "compute.googleapis.com"
   ]
 }
 

@@ -17,23 +17,8 @@ variable "billing_account_id" {
   type        = string
 }
 
-variable "ip_ranges" {
-  description = "Subnet IP CIDR ranges."
-  type        = map(string)
-  default = {
-    hub     = "10.0.0.0/24"
-    spoke   = "10.0.16.0/24"
-  }
-}
-
-variable "owners_svc" {
+variable "owners" {
   description = "Service project owners, in IAM format."
-  type        = list(string)
-  default     = []
-}
-
-variable "owners_host" {
-  description = "Host project owners, in IAM format."
   type        = list(string)
   default     = []
 }
@@ -45,11 +30,6 @@ variable "prefix" {
 
 variable "env_name" {
   description = "Environment name (for example, dev). Will be put into resource names when needed."
-  type        = string
-}
-
-variable "svc_project_name" {
-  description = "Project name for the service project (without the prefix)"
   type        = string
 }
 
@@ -74,19 +54,8 @@ variable "root_node" {
   type        = string
 }
 
-variable "project_create" {
-  description = "Set to non null if the hub project needs to be created."
-  type = object({
-    oslogin         = bool
-    parent          = string
-  })
-  default = null
-  validation {
-    condition = (
-      var.project_create == null
-      ? true
-      : can(regex("(organizations|folders)/[0-9]+", var.project_create.parent))
-    )
-    error_message = "Project parent must be of the form folders/folder_id or organizations/organization_id."
-  }
+variable "app_projects" {
+  description = "Application list. A separate prooject will be created for each application."
+  type        = list(string)
+  default     = []
 }
