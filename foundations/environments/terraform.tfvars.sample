@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-billing_account_id = "01894F-FA7D6D-2F89BF"
+billing_account_id = ""
 
 environments = ["dev", "stage", "prod"]
 
-iam_audit_viewers = ["user:nstrelkova@google.com"]
-iam_shared_owners = ["user:nstrelkova@google.com"]
-iam_terraform_owners = ["user:nstrelkova@google.com"]
+iam_audit_viewers = ["user:me@vb.com"]
+iam_shared_owners = ["user:me@vb.com"]
+iam_terraform_owners = ["user:me@vb.com"]
 
-organization_id = "102420064371"
-prefix = "vb3"
-root_node = "folders/731950865872"
+organization_id = ""
+prefix = ""
+root_node = ""
