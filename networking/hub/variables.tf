@@ -24,12 +24,12 @@ variable "owners" {
 }
 
 variable "prefix" {
-  description = "Prefix used for resources that need unique names."
+  description = "Prefix used for resources that need unique names ('prefix-name')."
   type        = string
 }
 
-variable "project_services" {
-  description = "Service APIs enabled by default in new projects."
+variable "hub_services" {
+  description = "Service APIs enabled in the hub project."
   type        = list(string)
   default = [
     "container.googleapis.com",
@@ -47,4 +47,16 @@ variable "region" {
 variable "root_node" {
   description = "Hierarchy node where projects will be created, 'organizations/org_id' or 'folders/folder_id'."
   type        = string
+}
+
+variable "subnet_ip_range" { # TODO: multiple ranges mapped to regions
+  description = "IP CIDR range for the hub subnet."
+  type        = string
+  default     = "10.0.0.0/24"
+}
+
+variable "firewall_ip_ranges" { # TODO: multiple?
+  description = "IP CIDR ranges to open in the firewall."
+  type        = list(string)
+  default     = ["10.0.16.0/24"] # see networking/dev/variables.tf, subnet_ip_range variable
 }

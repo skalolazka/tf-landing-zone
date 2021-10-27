@@ -18,11 +18,8 @@ module "hub_project" {
   oslogin         = false
   parent          = var.root_node
   prefix          = var.prefix
-  name            = "hub"
-  services = [
-    "compute.googleapis.com",
-    "container.googleapis.com"
-  ]
+  name            = "hub" # "prefix-name"
+  services        = var.hub_services
   service_config = {
     disable_on_destroy         = false,
     disable_dependent_services = false
@@ -36,9 +33,10 @@ module "hub_project_vpc" {
   source     = "../../modules/net-vpc"
   project_id = module.hub_project.project_id
   name       = "${module.hub_project.project_id}-vpc"
+  # TODO: mulptiple, something like: subnets = [for region, range in var.ip_ranges : region -> range ]
   subnets    = [
     {
-      ip_cidr_range      = "10.0.0.0/24"
+      ip_cidr_range      = var.subnet_ip_range
       name               = "${module.hub_project.project_id}-${var.region}-subnet"
       region             = var.region
       secondary_ip_range = {}
@@ -46,10 +44,10 @@ module "hub_project_vpc" {
   ]
 }
 
-module "vpc-hub-firewall" {
+module "hub_vpc_firewall" {
   source       = "../../modules/net-vpc-firewall"
   project_id   = module.hub_project.project_id
   network      = module.hub_project_vpc.name
-  ssh_source_ranges = ["35.235.240.0/20"]
-  admin_ranges = ["10.0.16.0/24"]
+  ssh_source_ranges = ["35.235.240.0/20"] # IAP
+  admin_ranges = var.firewall_ip_ranges
 }
